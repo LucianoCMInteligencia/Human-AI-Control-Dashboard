@@ -1,0 +1,11 @@
+{
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": ".",
+  "routes": [
+    {
+      "src": "/(?!.*\\.).*",
+      "destination": "/index.html"
+    }
+  ]
+}

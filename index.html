@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Human-AI Control Dashboard - Plataforma futurista de control de IA supervisada por humanos">
+    <title>Human-AI Control Dashboard</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">H.A.I Control</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#home" class="nav-item active" data-route="home" title="Inicio">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">Inicio</span>
+                </a>
+                <a href="#streams" class="nav-item" data-route="streams" title="Streams">
+                    <span class="nav-icon">📡</span>
+                    <span class="nav-label">Streams</span>
+                </a>
+                <a href="#programming" class="nav-item" data-route="programming" title="Programación">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-label">Programación</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-route="analytics" title="Analítica">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Analítica</span>
+                </a>
+                <a href="#settings" class="nav-item" data-route="settings" title="Ajustes">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-label">Ajustes</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle" id="themeToggle" title="Cambiar tema">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenedor principal -->
+        <div class="main-wrapper">
+            
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <div class="ai-status">
+                        <span class="status-indicator"></span>
+                        <span class="status-text">Sistema IA Online</span>
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <h1 class="page-title">Inicio</h1>
+                </div>
+
+                <div class="header-right">
+                    <button class="override-btn" id="overrideBtn" title="Control manual de IA">
+                        🛑 Override Humano
+                    </button>
+                    <div class="user-avatar" title="Perfil">👤</div>
+                </div>
+            </header>
+
+            <!-- Contenido principal -->
+            <main class="main-content">
+                
+                <!-- Página Home -->
+                <section id="page-home" class="page active" data-page="home">
+                    <div class="page-header">
+                        <h2>Panel de Control</h2>
+                        <p class="page-subtitle">Supervisión y control de sistemas de IA en tiempo real</p>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <!-- Card: Estado General -->
+                        <div class="dashboard-card">
+                            <div class="card-icon">🤖</div>
+                            <h3>Estado IA</h3>
+                            <p class="card-value">OPERACIONAL</p>
+                            <p class="card-meta">Control: HUMANO</p>
+                        </div>
+
+                        <!-- Card: Procesamiento -->
+                        <div class="dashboard-card">
+                            <div class="card-icon">⚙️</div>
+                            <h3>Procesamiento</h3>
+                            <p class="card-value">98.5%</p>
+                            <p class="card-meta">Capacidad disponible</p>
+                        </div>
+
+                        <!-- Card: Decisiones Tomadas -->
+                        <div class="dashboard-card">
+                            <div class="card-icon">✅</div>
+                            <h3>Decisiones Humanas</h3>
+                            <p class="card-value">247</p>
+                            <p class="card-meta">Últimas 24 horas</p>
+                        </div>
+
+                        <!-- Card: Alertas -->
+                        <div class="dashboard-card">
+                            <div class="card-icon">⚠️</div>
+                            <h3>Alertas Activas</h3>
+                            <p class="card-value">3</p>
+                            <p class="card-meta">Requieren revisión</p>
+                        </div>
+                    </div>
+
+                    <div class="home-sections">
+                        <!-- Últimas Acciones -->
+                        <section class="content-section">
+                            <h3 class="section-title">Últimas Acciones de Control</h3>
+                            <div class="action-list">
+                                <div class="action-item">
+                                    <span class="action-time">hace 5 min</span>
+                                    <span class="action-text">Override activado en Módulo de Análisis</span>
+                                </div>
+                                <div class="action-item">
+                                    <span class="action-time">hace 23 min</span>
+                                    <span class="action-text">Parámetros de IA ajustados manualmente</span>
+                                </div>
+                                <div class="action-item">
+                                    <span class="action-time">hace 1 h</span>
+                                    <span class="action-text">Sugerencia de IA aprobada por operador</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Sistema de IA Insights -->
+                        <section class="content-section">
+                            <h3 class="section-title">Insights de IA (Supervisados)</h3>
+                            <div class="insights-container" id="insightsContainer">
+                                <!-- Se llena dinámicamente -->
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <!-- Página Streams -->
+                <section id="page-streams" class="page" data-page="streams">
+                    <div class="page-header">
+                        <h2>Streams en Vivo</h2>
+                        <p class="page-subtitle">Monitoreo de actividad en tiempo real</p>
+                    </div>
+
+                    <div class="filters-bar">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="messages">Mensajes</button>
+                        <button class="filter-btn" data-filter="mentions">Menciones</button>
+                        <button class="filter-btn" data-filter="activity">Actividad</button>
+                    </div>
+
+                    <div class="streams-container" id="streamsContainer">
+                        <!-- Se llena dinámicamente -->
+                    </div>
+                </section>
+
+                <!-- Página Programación -->
+                <section id="page-programming" class="page" data-page="programming">
+                    <div class="page-header">
+                        <h2>Programación de Publicaciones</h2>
+                        <p class="page-subtitle">Calendario de contenido planificado</p>
+                    </div>
+
+                    <div class="programming-container">
+                        <div class="calendar-wrapper">
+                            <h3>Calendario</h3>
+                            <div class="calendar" id="calendar">
+                                <!-- Se llena dinámicamente -->
+                            </div>
+                        </div>
+
+                        <div class="scheduled-items">
+                            <h3>Publicaciones Programadas</h3>
+                            <div class="scheduled-list" id="scheduledList">
+                                <!-- Se llena dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Analítica -->
+                <section id="page-analytics" class="page" data-page="analytics">
+                    <div class="page-header">
+                        <h2>Analítica y Reportes</h2>
+                        <p class="page-subtitle">Métricas de desempeño y análisis</p>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="chart-container">
+                            <h3>Actividad por Hora</h3>
+                            <canvas id="activityChart" width="400" height="200"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <h3>Distribución de Categorías</h3>
+                            <canvas id="categoryChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <h4>Engagement Rate</h4>
+                            <p class="metric-value">87.3%</p>
+                            <span class="metric-change positive">↑ 12.5%</span>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Alcance</h4>
+                            <p class="metric-value">54.2K</p>
+                            <span class="metric-change positive">↑ 8.3%</span>
+                        </div>
+                        <div class="metric-card">
+                            <h4>Conversiones</h4>
+                            <p class="metric-value">3.8K</p>
+                            <span class="metric-change negative">↓ 2.1%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Ajustes -->
+                <section id="page-settings" class="page" data-page="settings">
+                    <div class="page-header">
+                        <h2>Ajustes del Sistema</h2>
+                        <p class="page-subtitle">Configuración y control de parámetros</p>
+                    </div>
+
+                    <div class="settings-container">
+                        <div class="settings-section">
+                            <h3>Parámetros de IA</h3>
+                            <div class="setting-item">
+                                <label>Nivel de Autonomía</label>
+                                <div class="setting-control">
+                                    <input type="range" min="0" max="100" value="45" id="autonomySlider">
+                                    <span class="setting-value">45%</span>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <label>Umbral de Aprobación Humana</label>
+                                <div class="setting-control">
+                                    <input type="range" min="0" max="100" value="60" id="approvalSlider">
+                                    <span class="setting-value">60%</span>
+                                </div>
+                            </div>
+
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="autoApproveToggle" checked>
+                                <label for="autoApproveToggle">Permitir aprobaciones automáticas (bajo supervisión)</label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Notificaciones</h3>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="alertsToggle" checked>
+                                <label for="alertsToggle">Alertas de sistema</label>
+                            </div>
+                            <div class="setting-item checkbox">
+                                <input type="checkbox" id="overrideNotifyToggle" checked>
+                                <label for="overrideNotifyToggle">Notificar overrides humanos</label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Información del Sistema</h3>
+                            <div class="info-item">
+                                <span>Versión:</span>
+                                <span>1.0.0-alpha</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Último Actualización:</span>
+                                <span id="lastUpdate">Cargando...</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <span class="footer-status">Sistema: <strong>OPERACIONAL</strong></span>
+                    <span class="footer-time" id="footerTime">00:00</span>
+                    <span class="footer-credit">Human-AI Control Dashboard v1.0</span>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="src/js/data.js"></script>
+    <script src="src/js/main.js"></script>
+</body>
+</html>
