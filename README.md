@@ -266,3 +266,5 @@ Este proyecto es de uso libre y puede ser modificado según necesidades.
 **¿Preguntas?** Revisa el código comentado en cada archivo para más detalles.
 
 **¡Feliz coding!** 🚀
+#   P a n e l   d e   c o n t r o l   d e   I A   h u m a n a  
+ 
