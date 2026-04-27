@@ -1,0 +1,18 @@
+{
+  "name": "human-ai-control-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard for human-supervised AI control",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "start": "vercel start"
+  },
+  "dependencies": {
+    "@google-cloud/language": "^6.0.0"
+  },
+  "devDependencies": {},
+  "keywords": ["ai", "dashboard", "human-control"],
+  "author": "LucianoCMInteligencia",
+  "license": "MIT"
+}

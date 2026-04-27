@@ -216,13 +216,38 @@ El sistema detecta y guarda la preferencia:
 localStorage.getItem('theme')  // 'dark' o 'light'
 ```
 
-## 🔐 Control Humano - Características de Supervisión
+## 🤖 Integración con Google Cloud AI
 
-1. **Override Humano**: Botón rojo para control manual inmediato
-2. **Indicador IA Online**: Muestra estado del sistema
-3. **Parámetros Ajustables**: Control de autonomía y umbrales
-4. **Logs de Acciones**: Registro de todas las decisiones humanas
-5. **Insights Supervisados**: Recomendaciones de IA esperando aprobación
+El dashboard incluye procesamiento inteligente de streams usando Google Cloud Natural Language API:
+
+### Características de IA
+- **Análisis de Sentimiento**: Detecta si el contenido es positivo, negativo o neutral
+- **Extracción de Entidades**: Identifica personas, organizaciones, lugares y conceptos clave
+- **Procesamiento Automático**: Los streams nuevos se analizan cada 30 segundos
+
+### Cómo Funciona
+1. Los streams se envían a una función serverless en Vercel
+2. La función llama a Google Cloud Natural Language API
+3. Los resultados se devuelven y se muestran en la interfaz
+4. Cada stream muestra su análisis de sentimiento y entidades detectadas
+
+### Configuración Requerida
+1. **Cuenta Google Cloud**: Crear proyecto en [console.cloud.google.com](https://console.cloud.google.com)
+2. **Habilitar APIs**: Natural Language API
+3. **Credenciales**: Configurar service account y variables de entorno en Vercel
+4. **Variables de Entorno en Vercel**:
+   ```
+   GOOGLE_APPLICATION_CREDENTIALS_JSON=<tu-json-de-credenciales>
+   ```
+
+### Código de Ejemplo
+```javascript
+// Procesamiento de streams con AI
+const [result] = await client.analyzeSentiment({ document });
+const sentiment = result.documentSentiment;
+
+// Resultado: { score: 0.8, magnitude: 1.2, label: 'positivo' }
+```
 
 ## 🌐 Compatibilidad
 
@@ -240,7 +265,8 @@ localStorage.getItem('theme')  // 'dark' o 'light'
 
 ## 🚀 Mejoras Futuras Sugeridas
 
-- [ ] Backend API para datos reales
+- [x] **Backend API para datos reales** - Implementado con Vercel Functions
+- [x] **Google Cloud AI para procesamiento de streams** - Integrado con Natural Language API
 - [ ] WebSocket para updates en tiempo real
 - [ ] Exportar reportes a PDF
 - [ ] Sistema de notificaciones push
@@ -266,5 +292,6 @@ Este proyecto es de uso libre y puede ser modificado según necesidades.
 **¿Preguntas?** Revisa el código comentado en cada archivo para más detalles.
 
 **¡Feliz coding!** 🚀
-#   P a n e l   d e   c o n t r o l   d e   I A   h u m a n a  
+#   P a n e l   d e   c o n t r o l   d e   I A   h u m a n a 
+ 
  

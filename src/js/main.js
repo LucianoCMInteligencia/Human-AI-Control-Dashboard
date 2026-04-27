@@ -202,6 +202,18 @@ class Dashboard {
                     <div class="stream-timestamp">${stream.timestamp}</div>
                 </div>
                 <div class="stream-content">${stream.content}</div>
+                ${stream.sentiment ? `
+                <div class="stream-analysis">
+                    <div class="sentiment-badge sentiment-${stream.sentiment.label}">
+                        Sentimiento: ${stream.sentiment.label} (${stream.sentiment.score?.toFixed(2)})
+                    </div>
+                    ${stream.entities && stream.entities.length > 0 ? `
+                    <div class="entities-list">
+                        Entidades: ${stream.entities.map(e => e.name).join(', ')}
+                    </div>
+                    ` : ''}
+                </div>
+                ` : ''}
                 <div class="stream-footer">
                     <span>❤️ ${stream.reactions}</span>
                     <span>💬 Responder</span>
@@ -463,6 +475,9 @@ class Dashboard {
         // Agregar nuevo stream
         addNewStream();
 
+        // Procesar streams con Google Cloud AI
+        this.processStreamsWithAI();
+
         // Actualizar métricas en la página home
         const metrics = updateMetrics();
         const processingCard = document.querySelector('.dashboard-card:nth-child(2) .card-value');
@@ -485,6 +500,34 @@ class Dashboard {
         }
 
         console.log('Datos actualizados en tiempo real:', new Date().toLocaleTimeString());
+    }
+
+    // ---- PROCESAMIENTO DE STREAMS CON GOOGLE CLOUD AI ----
+    async processStreamsWithAI() {
+        try {
+            const response = await fetch('/api/process-streams', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ streams: DATA.streams.slice(0, 3) }) // Procesar últimos 3 streams
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Actualizar streams con datos procesados
+                data.processedStreams.forEach((processedStream, index) => {
+                    if (DATA.streams[index]) {
+                        DATA.streams[index] = { ...DATA.streams[index], ...processedStream };
+                    }
+                });
+                console.log('Streams procesados con AI:', data.processedStreams);
+            } else {
+                console.error('Error procesando streams:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error en la llamada a la API:', error);
+        }
     }
 }
 

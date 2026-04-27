@@ -1098,6 +1098,78 @@ body {
 
 ::-webkit-scrollbar-track {
     background: rgba(0, 229, 255, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 229, 255, 0.5);
+}
+
+/* ---- STREAM ANALYSIS ---- */
+.stream-analysis {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-sm);
+    background: rgba(0, 229, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.sentiment-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.sentiment-positivo {
+    background: rgba(34, 197, 94, 0.2);
+    color: #16A34A;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.sentiment-negativo {
+    background: rgba(239, 68, 68, 0.2);
+    color: #DC2626;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.sentiment-neutral {
+    background: rgba(156, 163, 175, 0.2);
+    color: #6B7280;
+    border: 1px solid rgba(156, 163, 175, 0.3);
+}
+
+.sentiment-error {
+    background: rgba(245, 158, 11, 0.2);
+    color: #D97706;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.entities-list {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--spacing-xs);
+}
+
+/* ============================================
+   UTILIDADES Y ESTADOS
+   ============================================ */
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 229, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
