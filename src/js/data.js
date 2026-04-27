@@ -191,13 +191,48 @@ function getFormattedDate() {
     return new Date().toLocaleDateString('es-ES', options);
 }
 
-// Función para generar datos de ejemplo para un rango de tiempo
-function generateTimeSeriesData(days = 7) {
-    const data = [];
-    for (let i = days; i >= 0; i--) {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        data.push({
+// Función para generar un nuevo stream aleatorio
+function generateRandomStream() {
+    const authors = ["Usuario Alpha", "Sistema IA", "Monitor Beta", "Usuario Gamma"];
+    const types = ["mensaje", "mención", "actividad"];
+    const contents = [
+        "Nueva actualización de IA detectada.",
+        "Override aplicado por operador humano.",
+        "Anomalía corregida automáticamente."
+    ];
+    return {
+        id: Date.now(), // ID único basado en timestamp
+        author: authors[Math.floor(Math.random() * authors.length)],
+        type: types[Math.floor(Math.random() * types.length)],
+        content: contents[Math.floor(Math.random() * contents.length)],
+        timestamp: "hace " + Math.floor(Math.random() * 60) + " min",
+        category: types[Math.floor(Math.random() * types.length)].replace("mensaje", "messages").replace("mención", "mentions").replace("actividad", "activity"),
+        reactions: Math.floor(Math.random() * 20)
+    };
+}
+
+// Función para actualizar métricas dinámicamente (ej. procesamiento)
+function updateMetrics() {
+    // Simular variación en procesamiento (entre 95% y 100%)
+    const processingValue = (95 + Math.random() * 5).toFixed(1);
+    // Actualizar alertas (0-5 aleatorias)
+    const alertsValue = Math.floor(Math.random() * 6);
+    // Actualizar decisiones humanas (incrementar ligeramente)
+    const decisionsValue = 247 + Math.floor(Math.random() * 10);
+
+    return {
+        processing: processingValue,
+        alerts: alertsValue,
+        decisions: decisionsValue
+    };
+}
+
+// Función para agregar un nuevo stream a la lista
+function addNewStream() {
+    const newStream = generateRandomStream();
+    DATA.streams.unshift(newStream); // Agregar al inicio
+    if (DATA.streams.length > 10) DATA.streams.pop(); // Mantener máximo 10 streams
+}
             date: date.toISOString().split('T')[0],
             value: Math.floor(Math.random() * 100) + 20
         });

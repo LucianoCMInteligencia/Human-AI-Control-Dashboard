@@ -20,6 +20,8 @@ class Dashboard {
         this.renderHome();
         this.initCharts();
         setInterval(() => this.updateTime(), 1000);
+        // Agregar polling para actualizaciones en tiempo real
+        setInterval(() => this.updateRealtimeData(), 30000); // Cada 30 segundos
     }
 
     // ---- CONFIGURACIÓN DE TEMA ----
@@ -454,6 +456,35 @@ class Dashboard {
         if (timeElement) {
             timeElement.textContent = getCurrentTime();
         }
+    }
+
+    // ---- ACTUALIZACIONES EN TIEMPO REAL ----
+    updateRealtimeData() {
+        // Agregar nuevo stream
+        addNewStream();
+
+        // Actualizar métricas en la página home
+        const metrics = updateMetrics();
+        const processingCard = document.querySelector('.dashboard-card:nth-child(2) .card-value');
+        const alertsCard = document.querySelector('.dashboard-card:nth-child(4) .card-value');
+        const decisionsCard = document.querySelector('.dashboard-card:nth-child(3) .card-value');
+
+        if (processingCard) processingCard.textContent = metrics.processing + '%';
+        if (alertsCard) alertsCard.textContent = metrics.alerts;
+        if (decisionsCard) decisionsCard.textContent = metrics.decisions;
+
+        // Re-renderizar streams si estamos en la página streams
+        if (this.currentPage === 'streams') {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            this.renderStreams(activeFilter);
+        }
+
+        // Re-renderizar insights en home
+        if (this.currentPage === 'home') {
+            this.renderHome();
+        }
+
+        console.log('Datos actualizados en tiempo real:', new Date().toLocaleTimeString());
     }
 }
 
